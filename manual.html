@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配車調整アプリ - 利用マニュアル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-feature-settings: "palt";
+        }
+
+        h2 {
+            border-bottom: 2px solid #60A5FA;
+            /* blue-400 */
+            padding-bottom: 8px;
+            margin-top: 2.5rem;
+            /* mt-10 */
+            margin-bottom: 1rem;
+            /* mb-4 */
+        }
+
+        h3 {
+            border-left: 5px solid #93C5FD;
+            /* blue-300 */
+            padding-left: 10px;
+            margin-top: 2rem;
+            /* mt-8 */
+            margin-bottom: 0.75rem;
+            /* mb-3 */
+        }
+
+        .step {
+            background-color: #EFF6FF;
+            /* blue-50 */
+            border: 1px solid #BFDBFE;
+            /* blue-200 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            padding: 1rem;
+            /* p-4 */
+            margin-bottom: 1rem;
+            /* mb-4 */
+        }
+
+        .caution {
+            background-color: #FFFBEB;
+            /* yellow-50 */
+            border: 1px solid #FDE68A;
+            /* yellow-200 */
+            color: #B45309;
+            /* yellow-700 */
+            padding: 1rem;
+            /* p-4 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans leading-relaxed text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-10 max-w-3xl bg-white shadow-lg rounded-lg my-10">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">
+            配車調整アプリ 利用マニュアル <span class="text-2xl font-normal text-gray-500">v3.0</span>
+        </h1>
+
+        <section class="mb-10 text-center">
+            <p class="text-lg">
+                このアプリは、チームの遠征やイベントなどで「誰がどの車に乗るか」を自動で割り当てるためのツールです。
+            </p>
+            <p class="mt-2 text-gray-600">
+                「どの車がどの駐車場に停めるか」も自動で振り分けます。
+            </p>
+        </section>
+
+        <div class="caution mb-10">
+            <h3 class="text-xl font-bold mt-0 mb-2 text-yellow-800">！ 必ずお読みください：データの保存について</h3>
+            <p>
+                このアプリは、入力したデータ（参加者や車のリスト、作成した割り当て結果など）を、お使いの**ブラウザ（ChromeやSafariなど）の中だけ**に保存します。
+            </p>
+            <ul class="list-disc list-inside mt-3 space-y-1">
+                <li>サーバーやクラウドには送信されません。</li>
+                <li>スマホやPCを買い替えたり、別のブラウザを使うと、データは引き継げません。</li>
+                <li>ブラウザの履歴やキャッシュを消去すると、データも**すべて消えてしまう**可能性があります。</li>
+            </ul>
+            <p class="mt-3 font-bold">
+                大切なデータ（特に「マスターデータ」）は、こまめに「マスターを保存(JSON)」ボタンからファイルとして書き出し、バックアップ（予備を保存）するようにしてください。
+            </p>
+        </div>
+
+
+        <h2 class="text-3xl font-bold text-gray-700">基本的な使い方 (メインアプリ)</h2>
+        <p class="mb-6">
+            メインアプリ（index.html）を開き、上から下へ順番に情報を入力・選択していきます。
+        </p>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ1： イベント日とイベント名</h3>
+            <p>
+                いつ、何のイベントかを入力します。ここで入力した内容は、割り当て結果のタイトルとして表示されます。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ2： タイムライン・特記事項</h3>
+            <p>
+                集合時間や出発時間などのスケジュール（タイムライン）や、持ち物・注意事項などの特記事項を入力します。<br>
+                これらは配車計算には影響しませんが、テキスト出力時に一緒に記載され、連絡用として役立ちます。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ3： グラウンド・駐車場情報</h3>
+            <p>
+                目的地の情報を入力します。
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><strong>グラウンド名:</strong> 「SF (ホーム)」や「〇〇小学校」など、場所の名前を入力します。</li>
+                <li><strong>指定駐車場:</strong> チームの車を停めるよう指定された駐車場の名前（例: A面）、台数制限、地図URLなどの備考を入力します。</li>
+                <li><strong>指定以外の駐車場:</strong> それ以外の車を停める場所（例: 丘の上）の情報を入力します。</li>
+            </ul>
+            <p class="mt-2 text-sm text-gray-600">
+                ※よく使うグラウンド情報は、管理メニューの「② グラウンド・駐車場」で保存・呼び出しが可能です。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ4： 参加者を選択</h3>
+            <p>
+                「家族・グループ」ごとに、今回のイベントに参加する人のチェックボックスを「オン」にします。
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li>「全員参加」ボタンを押すと、その家族全員にチェックが入ります。</li>
+                <li>「同乗優先」がオンになっている人（主に選手）は、「学年」や「学校」などの入力欄が表示されます。ここに入力しておくと、割り当て時に同じ学年・学校の子がなるべく同じ車に集まるようになります。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ5： 車とドライバーを選択</h3>
+            <p>
+                今回出す車にチェックを「オン」にします。<br>
+                チェックを入れると、追加の選択肢が表示されます。
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><strong>ドライバー:</strong> 運転する人を必ず選んでください。</li>
+                <li><strong>荷物あり:</strong>
+                    旗やボール、テントなどの大きな荷物を積む場合、チェックを入れます。チェックを入れると、安全のため、その車の定員が自動的に「2名（ドライバー＋1名）」として計算されます。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ6： 別便の人を除外</h3>
+            <p>
+                ステップ4で「参加する」にチェックした人（ドライバーを除く）のうち、
+                「現地集合」や「自転車で行く」など、配車が不要な人がいれば、ここでチェックを「オン」にします。
+            </p>
+            <p class="mt-2 text-sm text-gray-600">
+                ※ここでチェックした人は、最後の「割り当て結果」で「別便」の欄にまとめられます。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">ステップ7： 割り当て実行と結果（手動調整）</h3>
+            <p>
+                すべての入力が終わったら、<span class="bg-blue-600 text-white py-1 px-2 rounded-md">割り当て実行</span> ボタンを押してください。<br>
+                自動で割り当てられた結果がカード形式で表示されます。
+            </p>
+
+            <h4 class="font-semibold mt-3 mb-1">■ 手動調整（入れ替え）</h4>
+            <p>結果が気に入らない場合は、チェックボックスを使って手動で入れ替えることができます。</p>
+            <ul class="list-disc list-inside ml-4 space-y-1">
+                <li><strong>人の入れ替え:</strong> 入れ替えたい2人（または空席）のチェックボックスをオンにすると入れ替わります。</li>
+                <li><strong>車の入れ替え:</strong> 入れ替えたい2台の車の名前横のチェックボックスをオンにすると、駐車場（指定／指定以外）が入れ替わります。</li>
+            </ul>
+
+            <h4 class="font-semibold mt-3 mb-1">■ テキスト出力</h4>
+            <p class="ml-4">
+                「テキスト出力」ボタンを押すと、LINEなどで連絡しやすい形式のテキストが表示されます。「コピー」ボタンでコピーして使えます。
+            </p>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-700">管理メニュー (メインアプリ)</h2>
+        <p class="mb-6">
+            メインアプリの上部にある「管理メニュー・メッセージ」欄では、作業内容を保存したり、過去の作業を呼び出したりできます。
+        </p>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">① 配車データ（現在の作業状態）</h3>
+            <p>
+                「今、誰にチェックをつけたか」「どの車を選んだか」という作業途中の状態を、お使いのブラウザに保存できます。（名前をつけて保存できます）
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><span class="font-bold text-blue-700">「保存」:</span> 現在の配車状態を保存します。</li>
+                <li><span class="font-bold text-gray-700">「作業一覧...」:</span> 過去に保存した状態を選んで「読込」ボタンで復元します。</li>
+                <li><span class="font-bold text-red-700">「削除」:</span> 一覧で選択した保存データを削除します。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">② グラウンド・駐車場</h3>
+            <p>
+                ステップ4で入力した「グラウンド名」や「駐車場の情報」を、お使いのブラウザに保存できます。
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><span class="font-bold text-blue-700">「保存」:</span> 現在の駐車場データを保存します。（名前をつけて保存できます）</li>
+                <li><span class="font-bold text-gray-700">「グラウンド・駐車場一覧...」:</span> 過去に保存した駐車場データを選んで「読込」ボタンで入力欄に復元します。
+                </li>
+                <li><span class="font-bold text-red-700">「削除」:</span> 一覧で選択した保存データを削除します。</li>
+            </ul>
+            <p class="mt-3 text-sm text-gray-600">
+                よく行くグラウンドの情報を保存しておくと、次回から簡単に設定できます。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">③ ファイル保存・読込</h3>
+            <p>
+                現在の作業状態（配車データ）を、端末にファイル(.json)として保存（ダウンロード）したり、ファイルから読み込んだりできます。<br>
+                PCや別端末にデータを移すときに使えます。
+            </p>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">④ アプリ管理</h3>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><span class="font-bold text-gray-700">「マスター編集」:</span> 参加者や車のマスターデータを編集するページ（master.html）に移動します。
+                </li>
+                <li>
+                    <span class="font-bold text-red-700">「全データリセット」:</span><br>
+                    <strong>！注意！</strong> このボタンを押すと、マスターデータ、保存した作業、保存した駐車場など、ブラウザに保存したすべてのデータが消え、アプリが最初の状態に戻ります。<br>
+                    アプリの動きが完全におかしくなった場合や、すべてをリセットしたい場合の最終手段です。
+                </li>
+            </ul>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-700">最重要：マスターデータの管理</h2>
+        <p class="mb-6">
+            「マスターデータ」とは、アプリの大元となる「家族・参加者リスト」と「車リスト」のことです。<br>
+            メインアプリの右上にあるリンク、または管理メニュー内の「マスター編集」ボタンから、専用ページ（master.html）に移動して編集します。
+        </p>
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">家族・参加者の編集</h3>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><strong>家族・グループを追加:</strong> 新しい家族（例: 鈴木家）やグループ（例: コーチ）を追加します。</li>
+                <li><strong>メンバーを追加:</strong> 家族カードの中にあるボタンで、その家族に新しい人（例: 鈴木父）を追加します。</li>
+                <li><strong>名前・タイプの変更:</strong> 表示されている入力欄を直接書き換えると、自動で保存されます。</li>
+                <li><strong>同乗優先:</strong> チェックをオンにすると、メインアプリで「学年」「学校」などの入力欄が表示され、割り当て時に考慮されるようになります。 <span
+                        class="font-bold">選手や当番対象の兄弟はオン</span>に、保護者やスタッフはオフにするのがオススメです。</li>
+                <li><strong>並び替え (▲ ▼):</strong> 家族・グループの表示順を入れ替えます。メインアプリのステップ1の表示順もこれと同じになります。</li>
+            </ul>
+        </div>
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">車の編集</h3>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><strong>車を追加:</strong> 新しい車を追加します。IDは自動で決まります。</li>
+                <li><strong>関連する家族:</strong> 車の持ち主の家族を選んでおくと、メインアプリのステップ2で、その家族からドライバーを自動で選びやすくなります。</li>
+                <li><strong>並び替え (▲ ▼):</strong> 車の表示順を入れ替えます。メインアプリのステップ2の表示順もこれと同じになります。</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3 class="text-xl font-bold mt-0">駐車場（グラウンド）データの編集</h3>
+            <p>
+                メインアプリの管理メニューで保存した駐車場・グラウンドのデータをここで一覧表示・管理できます。
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4 space-y-1">
+                <li><strong>保存名、グラウンド名などの変更:</strong> 各入力欄を直接書き換えると、自動で保存されます。</li>
+                <li><strong>新しい駐車場を追加:</strong> 空の駐車場データを作成し、編集できます。</li>
+                <li><strong>削除:</strong> 不要になった駐車場データを削除します。</li>
+            </ul>
+        </div>
+        <div class="step caution">
+            <h3 class="text-xl font-bold mt-0">マスターの保存 (JSON)</h3>
+            <p class="font-bold">
+                これが最も重要なバックアップ機能です。
+            </p>
+            <p class="mt-2">
+                編集が終わったら、必ず<span class="bg-blue-600 text-white py-1 px-2 rounded-md">マスターを保存 (JSON)</span>
+                ボタンを押してください。<br>
+                このファイルには、**家族・参加者**、**車**、そして**保存済みの駐車場データ**のすべてが含まれます。
+                <span class="font-bold">`car_assignment_master_....json`</span> というファイルがダウンロードされます。
+            </p>
+            <p class="mt-2">
+                このファイルをPCやGoogleドライブなど、安全な場所に保存しておけば、万が一ブラウザのデータが消えても、
+                <span class="bg-yellow-500 text-white py-1 px-2 rounded-md">マスターを読み込む (JSON)</span>
+                ボタンからこのファイルを選ぶだけで、すべてのデータを元に戻せます。
+            </p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
