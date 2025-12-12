@@ -1632,19 +1632,18 @@ https://maps.app.goo.gl/..."></textarea>
                  });
             }
             
-            // 5. 別便 (出力イメージに含まない)
-            /*
+            // 5. 別便
             const excludedCar = currentAssignments.find(car => car.id === 'excluded-car');
             if (excludedCar && excludedCar.members.length > 0) {
-                 outputLines.push('\n□別便');
+                 outputLines.push(''); // 空行
+                 outputLines.push('◆別便');
                  excludedCar.members.filter(p => p !== null).forEach(p => { 
                      let name = p.name; 
                      if (p.type === '選手') name = '★' + name;
                      const memo = (participantData.get(p.id)?.memo || '').trim();
-                     outputLines.push(name + (memo ? ` [${memo}]` : '')); 
+                     outputLines.push('・' + name + (memo ? ` [${memo}]` : '')); 
                  }); 
             }
-            */
 
             // 6. その他特記事項
             if (currentEventInfo.notes) {
